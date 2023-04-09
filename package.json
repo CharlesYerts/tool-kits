@@ -1,0 +1,43 @@
+{
+  "name": "tool-kits",
+  "version": "1.0.0",
+  "description": "this project implements common used front-end tool-kits",
+  "main": "index.js",
+  "type": "module",
+  "types": "index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "default": "./dist/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clear": "rm -rf dist/",
+    "build": "npm run clear && rollup -c config/rollup.config.js",
+    "dev": "nodemon dist/index.esm.js",
+    "es": "tsc",
+    "generate": "npm run es && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharlesYerts/tool-kits.git"
+  },
+  "keywords": [
+    "tool-kits",
+    "typescript"
+  ],
+  "author": "Yerts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CharlesYerts/tool-kits/issues"
+  },
+  "homepage": "https://github.com/CharlesYerts/tool-kits#readme",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.0",
+    "rollup": "^3.20.2",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4"
+  }
+}
