@@ -1,7 +1,7 @@
 /*
  * @Author: yeertesi
  * @Date: 2023-04-10 03:35:24
- * @LastEditTime: 2023-04-11 04:47:27
+ * @LastEditTime: 2023-04-11 05:12:16
  * @LastEditors: yeertesi
  * @Description: CommonJS打包配置文件
  * @FilePath: /tool-kits/config/rollup.config.js
@@ -11,6 +11,8 @@ import dts from 'rollup-plugin-dts'
 import del from 'rollup-plugin-delete'
 import { terser } from 'rollup-plugin-terser'
 import { defineConfig } from 'rollup'
+import { babel } from "@rollup/plugin-babel";
+
 import pkg from '../package.json' assert {
   type: 'json',
 }
@@ -48,7 +50,12 @@ const config = defineConfig([
       typescript({
         declaration: false,
         target: "ES5"
-      })
+      }),
+      babel({
+        exclude: "**/node_modules/**",
+        babelHelpers: "runtime",
+        extensions: ['.js', '.ts'],
+      }),
     ]
   },
   {
@@ -61,7 +68,12 @@ const config = defineConfig([
     plugins: [
       typescript({
         declaration: false
-      })
+      }),
+      babel({
+        exclude: "**/node_modules/**",
+        babelHelpers: "runtime",
+        extensions: ['.js', '.ts'],
+      }),
     ]
   },
   // 归并 .d.ts 文件
