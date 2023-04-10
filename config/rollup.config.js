@@ -1,7 +1,7 @@
 /*
  * @Author: yeertesi
  * @Date: 2023-04-10 03:35:24
- * @LastEditTime: 2023-04-10 05:32:07
+ * @LastEditTime: 2023-04-11 04:47:27
  * @LastEditors: yeertesi
  * @Description: CommonJS打包配置文件
  * @FilePath: /tool-kits/config/rollup.config.js
@@ -11,10 +11,20 @@ import dts from 'rollup-plugin-dts'
 import del from 'rollup-plugin-delete'
 import { terser } from 'rollup-plugin-terser'
 import { defineConfig } from 'rollup'
+import pkg from '../package.json' assert {
+  type: 'json',
+}
+
+const banner = `/*
+ * ${pkg.name} ${pkg.version}
+ * Licensed under MIT
+*/
+`
+
 
 const publicConfig = {
   format: 'umd',
-  name: 'tool-kits'
+  name: 'tool-kits',
 }
 
 const config = defineConfig([
@@ -23,7 +33,8 @@ const config = defineConfig([
     output: [
       {
         file: 'dist/index.js',
-        ...publicConfig
+        ...publicConfig,
+        banner
       },
       {
         file: 'dist/index.min.js',
@@ -44,7 +55,8 @@ const config = defineConfig([
     input: 'src/index.ts',
     output: {
       file: 'dist/index.mjs.js',
-      format: 'esm'
+      format: 'esm',
+      banner
     },
     plugins: [
       typescript({
@@ -57,7 +69,8 @@ const config = defineConfig([
     input: 'types/index.d.ts',
     output: {
       file: 'dist/index.d.ts',
-      format: 'es'
+      format: 'es',
+      banner
     },
     plugins: [
       // 将类型文件全部集中到一个文件中
